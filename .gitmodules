@@ -1,0 +1,3 @@
+[submodule "Rust course"]
+	path = Rust course
+	url = git@github.com:peterochek/rust_practice.git
