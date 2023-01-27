@@ -1,0 +1,16 @@
+1. ps -u `whoami` или 
+    ps ax -Ao user,pid,command | awk -v me=`whoami` '{if ($1 == me) print $1, $2, $3}' (по столбикам)
+
+2.
+ 1) По номеру PID. Выше всех показываются процессы с изменяемыми в real-time столбиками. 
+ 2) top -o %MEM
+ 3) top -o (%CPU / %MEM / CGNAME / CGGROUPS / CODE / COMMAND / DATA .. (взято из `man top`))
+
+3. По умолчанию каждые 3 секунды. 
+format: top -d %f
+example: top -d 0.01 (каждую сотую секунды)
+
+4. ps axr
+a - все пользователи, x - процессы вне терминала, r - работающие (running state)
+
+5. kill -9 `PID` (у kill много вариантов (1 - Hangup, 2 - Interrupt from keyboard, 15 - Termination ... ))
