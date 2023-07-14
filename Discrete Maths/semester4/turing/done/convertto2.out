@@ -1,0 +1,41 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 0 -> ac 0 ^
+s 1 -> | 1 <
+s 2 -> | 2 <
+
+| _ -> _0 | <
+_0 _ -> traverse _0 >
+
+-1 1 -> +1 0 <
+-1 2 -> +1 1 <
+-1 0 -> -1 2 <
+-1 | -> finalize | >
+
++1 0 -> +1 0 <
++1 1 -> +1 1 <
++1 2 -> +1 2 <
++1 | -> +1 | <
++1 _0 -> traverse _1 >
++1 _1 -> +1 _0 <
++1 _  -> traverse _1 >
+
+traverse _0 -> traverse _0 >
+traverse _1 -> traverse _1 >
+traverse | -> traverse | >
+traverse 0 -> traverse 0 >
+traverse 1 -> traverse 1 >
+traverse 2 -> traverse 2 >
+traverse _ -> -1 _ <
+
+finalize | -> finalize | >
+finalize 2 -> finalize | >
+finalize _ -> return _ <
+
+return | -> return _ <
+return _0 -> return 0 <
+return _1 -> return 1 <
+return _ -> ac _ >
