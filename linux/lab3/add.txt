@@ -1,0 +1,17 @@
+Задание к 3 лабе.
+
+nano /etc/passwd
+# username:x:501:501:test_user:/home/username:/bin/bash (добавили пользователя)
+
+nano /etc/group
+# username:x:501: (добавили группу)
+
+passwd username # Вводим пароль
+
+mkdir /home/username
+
+chown username:username /home/username
+
+cp /etc/skel/.* /home/username
+
+su - username # (Вошли с нового пользователя)

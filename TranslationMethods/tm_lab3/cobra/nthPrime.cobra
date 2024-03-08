@@ -1,0 +1,61 @@
+def mod(a, q) {
+	x = a
+	zero = 0
+	while (x > zero || x == zero) {
+		x = x - q
+	}
+	return x + q
+}
+
+def isPrime(n) {
+    zero = 0
+    one = 1
+    two = 2
+    three = 3
+    if (n <= one) {
+        return 0
+    }
+    if (n <= three) {
+        return 1
+    }
+    modN2 = mod(n, two)
+    modN3 = mod(n, three)
+    if (modN2 == zero || modN3 == zero) {
+        return 0
+    }
+    i = 5
+    iSquared = i * i
+    while (iSquared <= n) {
+        iPlus2 = i + 2
+        modNi = mod(n, i)
+        modNiPlus2 = mod(n, iPlus2)
+        if (modNi == zero || modNiPlus2 == zero) {
+            return 0
+        }
+        i = i + 6
+        iSquared = i * i
+    }
+    return 1
+}
+
+def findNthPrime(n) {
+    one = 1
+    count = 0
+    candidate = 2
+    while (count < n) {
+        isPrimeCandidate = isPrime(candidate)
+        if (isPrimeCandidate == one) {
+            count = count + 1
+        }
+        if (count < n) {
+            candidate = candidate + 1
+        }
+    }
+    return candidate
+}
+
+main {
+    read(n)
+    nthPrime = findNthPrime(n)
+    print(nthPrime)
+}

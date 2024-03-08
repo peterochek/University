@@ -1,0 +1,47 @@
+<body dir="ltr">
+	<div id="template-header">
+		<form id="locale" class="locale" action="/pcms2client/set-locale.xhtml" method="get"
+			enctype="application/x-www-form-urlencoded"><label for="locale-name">Язык</label>
+			<select id="locale-name" name="locale-name" size="1" onchange="this.form.submit()">
+				<option value="Russian">Russian</option>
+				<option value="English">English</option>
+			</select>
+			<input id="return-path" type="hidden" name="return-path" value="/party/contests.xhtml?">
+		</form><img src="/pcms2client/javax.faces.resource/top3.png.xhtml?ln=template" alt="Web-клиент PCMS"
+			class="head">
+	</div>
+	<div id="template-menu"><a href="/pcms2client/party/contests.xhtml" title="Соревнования">Соревнования</a><a
+			href="/pcms2client/party/information.xhtml" title="Информация">Информация</a><a
+			href="/pcms2client/party/monitor.xhtml" title="Результаты">Результаты</a><a
+			href="/pcms2client/party/submit.xhtml" title="Отправить">Отправить</a><a
+			href="/pcms2client/party/runs.xhtml" title="Решения">Решения</a><a href="/pcms2client/party/questions.xhtml"
+			title="Вопросы">Вопросы</a><a href="/pcms2client/party/links.xhtml" title="Файлы">Файлы</a>
+		<form id="menu:7:logout" name="menu:7:logout" method="post" action="/pcms2client/party/contests.xhtml"
+			enctype="application/x-www-form-urlencoded">
+			<input type="hidden" name="menu:7:logout" value="menu:7:logout">
+			<script type="text/javascript" src="/pcms2client/javax.faces.resource/jsf.js.xhtml?ln=javax.faces"></script>
+			<a id="menu:7:logout:logout" href="#" title="Выход"
+				onclick="jsf.util.chain(this,event,'return confirm(\'Вы действительно хотите выйти?\')','mojarra.jsfcljs(document.getElementById(\'menu:7:logout\'),{\'menu:7:logout:logout\':\'menu:7:logout:logout\'},\'\')');return false">Выход</a><input
+				type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0"
+				value="8077195597347304132:-8464936769764425937" autocomplete="off">
+		</form>
+	</div>
+	<div id="template-main">
+		<div id="template-title">
+			<h1>Соревнования</h1>
+		</div>
+		<div class="template-padded">
+			<p><a id="contest:0:contest" name="contest:0:contest"
+					href="/pcms2client/party/contests.xhtml?contest=y2021dms4-turing%2Cru.ifmo.teaching.y2021.2-discrete-math.s4-02-lab"
+					title="Переключить соревнование">y2021, ДМ, 2 курс. Лабораторная работа по машине Тьюринга</a></p>
+			<p><a id="contest:1:contest" name="contest:1:contest"
+					href="/pcms2client/party/contests.xhtml?contest=y2021dms4%2Cru.ifmo.teaching.y2021.2-discrete-math.s4-01-lab"
+					title="Переключить соревнование">y2021, ДМ, 2 курс. Лабораторная работа по производящим функциям</a>
+			</p>
+			<p>y2021. Лабораторная работа по регулярным выражениям в Perl</p>
+			<p><a id="contest:3:contest" name="contest:3:contest"
+					href="/pcms2client/party/contests.xhtml?contest=y2021.math-logic%2Cru.ifmo.teaching.y2021.2-math-logic"
+					title="Переключить соревнование">Математическая логика, y2021. Лабораторная</a></p>
+		</div>
+	</div>
+</body>

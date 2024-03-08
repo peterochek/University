@@ -1,0 +1,31 @@
+def square(a) {
+    return a * a
+}
+
+def cubesWhile(a) {
+    odd = 1
+    sum = 0
+    while(odd < a) {
+        sum = sum + odd
+        odd = odd + 2
+    }
+    return sum
+}
+
+main {
+    odd = [1 : 10 : 2]
+
+    sumOdd = reduce((x, y) => x + y, odd, 0)
+
+    cnt = 10 / 2
+
+    smartSumOdd = square(cnt)
+
+    last = cnt * 2
+
+    whileSumOdd = cubesWhile(last)
+
+    print(sumOdd)
+    print(smartSumOdd, whileSumOdd)
+    printarr(odd)
+}

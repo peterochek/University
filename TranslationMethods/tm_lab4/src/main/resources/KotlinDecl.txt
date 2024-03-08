@@ -1,0 +1,63 @@
+script
+
+#import [
+    {guru.nidi.graphviz.model.Factory.*},
+    {util.ID.inc},
+    {util.ID.last},
+    {util.GraphVizStruct}
+]
+
+script returns [res : GraphVizStruct]
+        = {$res = GraphVizStruct()}
+        {val s = "Script"}
+        {$res!!.add(s, "DESC")}
+        desc({result.res!!}, {last()})
+        {$res!!.add(s, "CONT")}
+        cont({result.res!!}, {last()})
+        END
+        ;
+
+cont [res: GraphVizStruct, parent: String]
+        = {res.add(parent, "EPS")}
+        | {res.add(parent, "DESC")}
+        desc({res}, {last()})
+        {res.add(parent, "CONT")}
+        cont({res}, {last()})
+        ;
+
+desc [res: GraphVizStruct, parent: String]
+        = {res.add(parent, "DECL")}
+        decl({res}, {last()})
+        {res.add(parent, "VALUE")}
+        value({res}, {last()})
+        SEMICOLON
+        ;
+
+decl [res: GraphVizStruct, parent: String]
+        = v({res}, {last()})
+        NAME {res.add(parent, NAME)}
+        COLON {res.add(parent, COLON)}
+        TYPE {res.add(parent, TYPE)}
+        ;
+
+v [res: GraphVizStruct, parent: String]
+        = VAR {res.add(parent, VAR)}
+        | VAL {res.add(parent, VAL)}
+        ;
+
+value [res: GraphVizStruct, parent: String]
+        = {res.add(parent, "EPS")}
+        | EQ {res.add(parent, EQ)}
+        NUMBER {res.add(parent, NUMBER)}
+        ;
+
+VAR = "var";
+VAL = "val";
+NAME : "[a-z]+[a-zA-Z]*";
+COLON = ":";
+TYPE = "Int";
+EQ = "=";
+NUMBER : "(0)|([1-9][0-9]*)";
+SEMICOLON = ";";
+END = "$";
+

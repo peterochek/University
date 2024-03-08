@@ -1,0 +1,29 @@
+Задание к 4 лабе.
+
+sudo dnf install -y rpmdevtools rpmlint
+
+rpmdev-setuptree
+
+Создаем mytime.sh:
+
+#!/bin/bash
+echo "Current time : $(date)”
+
+Переносим mytime.sh:
+mkdir mytime-0.0.1
+mv time.sh mytime-0.0.1/
+
+Создаем архив
+tar --create --file mytime-0.0.1.tar.gz mytime-0.0.1
+
+mv mytime-0.0.1.tar.gz SOURCES
+
+rpmdev-newspec mytime.spec
+
+rpmbuild -ba ~/rpmbuild/SPECS/mytime.spec (build source file && binary)
+
+dnf install ~/rpmbuild/RPMS/noarch/hello-0.0.1-1.fd38.noarch.rpm
+
+Проверяем скрипт:
+[root@3eb99c8c896e /]# mytime
+Current time : Wed Oct  4 13:09:01 UTC 2023

@@ -1,0 +1,50 @@
+run
+
+run returns [v : #NUM_TYPE]
+            = expr {$v = expr.v}
+              END
+            ;
+
+expr returns [v : #NUM_TYPE]
+            = term expr_({term.v})
+              {$v = expr_.v}
+            ;
+
+expr_[left : #NUM_TYPE] returns [v : #NUM_TYPE]
+            = PLUS term {val next = left + term.v}
+              expr_(next) {$v = expr_.v}
+            | MINUS term {val next = left - term.v}
+              expr_(next) {$v = expr_.v}
+            | {$v = left}
+            ;
+
+term returns [v : #NUM_TYPE]
+            = factor term_({factor.v}) {$v = term_.v}
+            ;
+
+term_[left : #NUM_TYPE] returns [v : #NUM_TYPE]
+            = TIMES factor term_({left * factor.v}) {$v = term_.v}
+            | DIVIDE factor term_({left / factor.v}) {$v = term_.v}
+            | {$v = left}
+            ;
+
+factor returns [v : #NUM_TYPE]
+            = MINUS factor {$v = -factor.v}
+            | eval {$v = eval.v}
+            ;
+
+eval returns [v: #NUM_TYPE]
+            = LPAREN expr RPAREN {$v = expr.v}
+            | NUMBER          {$v = NUMBER.to#NUM_TYPE()}
+            ;
+
+#NUM_TYPE = "Double";
+
+PLUS = "+";
+MINUS = "-";
+TIMES = "*";
+DIVIDE = "/";
+LPAREN = "(";
+RPAREN = ")";
+NUMBER : "([0-9]+)(.[0-9]+)?";
+END = "$";
