@@ -1,0 +1,21 @@
+sudo dhclient -v
+sudo dhclient -6 -v
+
+ip addr show
+
+dns
+grep -E "domain-name |domain-search" /var/lib/dhcp/dhclient*.leases
+
+ip6
+grep -i "option dhcp6.name-servers" /var/lib/dhcp/dhclient*.leases
+
+dig @fdcd:2bcc:65a:c28f:dfe2:8070:1c62:444f t87gnq0nsaccqlwbu53xuh34.localnetwork AAAA
+
+ping -6 fdca:fd8e:8625:2c77:5b:4fff:fe11:cfdd
+
+Пингуем в задании slaac, чтобы проверить подключение, а также убедиться, что устройство правильно взаимодействует по сети со своим новым IPv6-адресом
+
+POST / HTTP/1.1  
+Host: t87gnq0nsaccqlwbu53xuh34.localnetwork:9229  
+User-Agent: curl/8.2.1  
+Accept: */*

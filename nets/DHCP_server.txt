@@ -1,0 +1,24 @@
+1) sudo apt install isc-dhcp-server
+2) В etc/default/isc-dhcp-server прописываем `INTERFACESv4="tap0"`, в /etc/dhcp/dhcpd.conf
+```
+subnet 10.138.194.0 netmask 255.255.255.0 {  
+ range 10.138.194.2 10.138.194.40;  
+ option routers 10.138.194.1;  
+}
+```
+
+Теперь ipv6:
+Используем проверенное решение `radvd`:
+sudo nano /etc/radvd.conf
+```
+interface tap0 {  
+ AdvSendAdvert on;  
+ prefix fdb0:5b3:5b9e:c563::/64 {  
+  AdvOnLink on;  
+ };  
+};
+```
+
+Присваиваем: `sudo ip -6 addr add fdb0:5b3:5b9e:c563::1 dev tap0`
+Перезапусаем сервер: `systemctl restart radvd.service`
+Смотрим MAC подключившегося бота: `journalctl -eu isc-dhcp-server.service`
